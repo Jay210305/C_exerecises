@@ -1,0 +1,114 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+class Alumno
+{
+private:
+  string nombre;
+  int edad;
+  double promedio;
+
+public:
+  void setNombre (string n)
+  {
+    nombre = n;
+  }
+
+  void setEdad (int a)
+  {
+    edad = a;
+  }
+
+  void setPromedio (double p)
+  {
+    promedio = p;
+  }
+
+  string getNombre ()
+  {
+    return nombre;
+  }
+
+  int getEdad ()
+  {
+    return edad;
+  }
+
+  double setPromedio ()
+  {
+    return promedio;
+  }
+  void imprimir ()
+  {
+      cout << "Nombre: " << nombre << endl;
+      cout << "Edad: " << edad << endl;
+      cout << "Promedio: " << promedio << endl;
+  }
+  bool comparar(Alumno otro) {
+    if (promedio < otro.getPromedio()) {
+      return true;
+    }
+    else {
+      return false;
+    }
+  }
+};
+
+class Grupo {
+private:
+  Alumno* estudiantes;
+  int cantidad;
+  
+public:
+  Grupo(int size) {
+    estudiantes = new Alumno[size];
+  }
+
+
+  ~Grupo() {
+    delete[] estudiantes;
+  }
+
+
+  Alumno* getEstudiantes() {
+    return estudiantes;
+  }
+
+
+  int getCantidad() {
+    return cantidad;
+  }
+  
+  
+  void displayEstudiantes() {
+    cout << "Máximo de estudiantes en el grupo: " << size << endl;
+    for (int i = 0; i < cantidad; i++) {
+      Studentn estudiante = estudiantes[i];
+      cout << "\nAlumno " << i+1 << ": " << endl;
+      cout << "Nombre: " << estudiante.getName() << endl;
+      cout << "Edad: " << estudiante.getAge() << endl;
+      cout << "Promedio: " << estudiante.getAverage() << endl;
+    }
+  }
+
+  void addEstudiante(Alumno s) {
+    if (cantidad < size) {
+      estudiantes[cantidad] = s;
+      cantidad++;
+    }
+    else {
+      cout << "Error: El grupo ya esta lleno." << endl;
+    }
+  }
+};
+
+
+int main() {
+    Alumno alumno_1;
+    alumno_1.setNombre("Pepito");
+    alumno_1.setEdad(18);
+    alumno_1.setPromedio(15.5);
+    alumno_1.imprimir();
+    return 0;
+}
