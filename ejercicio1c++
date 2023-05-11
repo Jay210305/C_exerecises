@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <cstdlib>
 using namespace std;
 
 class Alumno
@@ -39,77 +40,139 @@ public:
   {
     return promedio;
   }
+
   void imprimir ()
   {
-      cout << "Nombre: " << nombre << endl;
-      cout << "Edad: " << edad << endl;
-      cout << "Promedio: " << promedio << endl;
+    cout << "Nombre: " << nombre << endl;
+    cout << "Edad: " << edad << endl;
+    cout << "Promedio: " << promedio << endl;
   }
-  bool comparar(Alumno otro) {
-    if (promedio < otro.getPromedio()) {
-      return true;
-    }
-    else {
-      return false;
-    }
+  bool comparar (Alumno otro)
+  {
+    if (promedio < otro.getPromedio ())
+      {
+	return true;
+      }
+    else
+      {
+	return false;
+      }
   }
 };
 
-class Grupo {
+class Grupo
+{
 private:
-  Alumno* estudiantes;
+  Alumno * estudiantes;
   int cantidad;
   int max;
-  
+
 public:
-  Grupo(int max) {
+    Grupo (int max)
+  {
     estudiantes = new Alumno[max];
   }
 
 
-  ~Grupo() {
-    delete[] estudiantes;
+   ~Grupo ()
+  {
+    delete[]estudiantes;
   }
 
 
-  Alumno* getEstudiantes() {
+  Alumno *getEstudiantes ()
+  {
     return estudiantes;
   }
 
 
-  int getCantidad() {
+  int getCantidad ()
+  {
     return cantidad;
   }
-  
-  
-  void displayEstudiantes() {
-    cout << "Máximo de estudiantes en el grupo: " << this->max << endl;
-    for (int i = 0; i < cantidad; i++) {
-      Alumno estudiante = estudiantes[i];
-      cout << "\nAlumno " << i+1 << ": " << endl;
-      cout << "Nombre: " << estudiante.getNombre() << endl;
-      cout << "Edad: " << estudiante.getEdad() << endl;
-      cout << "Promedio: " << estudiante.getPromedio() << endl;
-    }
+
+
+  void displayEstudiantes ()
+  {
+    cout << "Maximo de estudiantes en el grupo: " << this->max << endl;
+    for (int i = 0; i < cantidad; i++)
+      {
+	Alumno estudiante = estudiantes[i];
+	cout << "\nAlumno " << i + 1 << ": " << endl;
+	cout << "Nombre: " << estudiante.getNombre () << endl;
+	cout << "Edad: " << estudiante.getEdad () << endl;
+	cout << "Promedio: " << estudiante.getPromedio () << endl;
+      }
   }
 
-  void addEstudiante(Alumno s) {
-    if (cantidad < max) {
-      estudiantes[cantidad] = s;
-      cantidad++;
-    }
-    else {
-      cout << "Error: El grupo ya esta lleno." << endl;
-    }
+  void addEstudiante (Alumno s)
+  {
+    if (cantidad < max)
+      {
+	estudiantes[cantidad] = s;
+	cantidad++;
+      }
+    else
+      {
+	cout << "Error: El grupo ya esta lleno." << endl;
+      }
+  }
+
+  void orderEstudiantesByPromedio ()
+  {
+    for (int i = 0; i < cantidad - 1; i++)
+      {
+	for (int j = i + 1; j < cantidad; j++)
+	  {
+	    if (estudiantes[i].comparar (estudiantes[j]))
+	      {
+		Alumno temp = estudiantes[i];
+		estudiantes[i] = estudiantes[j];
+		estudiantes[j] = temp;
+	      }
+	  }
+      }
+
+    cout << "\nEstudiantes ordenados por promedio:" << endl;
+    for (int i = 0; i < cantidad; i++)
+      {
+	Alumno estudiante = estudiantes[i];
+	cout << "Alumno " << i + 1 << ": " << endl;
+	cout << "Nombre: " << estudiante.getNombre () << endl;
+	cout << "Edad: " << estudiante.getEdad () << endl;
+	cout << "Promedio: " << estudiante.getPromedio () << endl;
+      }
+  }
+  void mayorPromedio ()
+  {
+    double highestPromedio = 0;
+    int highestPromedioIndex = -1;
+    for (int i = 0; i < cantidad; i++)
+      {
+	Alumno estudiante = estudiantes[i];
+	if (estudiante.getPromedio () > highestPromedio)
+	  {
+	    highestPromedio = estudiante.getPromedio ();
+	    highestPromedioIndex = i;
+	  }
+      }
+
+    if (highestPromedioIndex != -1)
+      {
+	cout << "\nAlumno(s) con el promedio mas alto: " << endl;
+	Alumno mejor_promedio;
+	mejor_promedio=estudiantes[highestPromedioIndex];
+	cout<< mejor_promedio.getNombre() << ", "<< mejor_promedio.getPromedio() << endl;
+	
+      }
+    else
+      {
+	cout << "No se encontraron estudiantes en el grupo." << endl;
+      }
   }
 };
 
-
-int main() {
-    Alumno alumno_1;
-    alumno_1.setNombre("Pepito");
-    alumno_1.setEdad(18);
-    alumno_1.setPromedio(15.5);
-    alumno_1.imprimir();
-    return 0;
+int main (){
+    
+return 0;
 }
