@@ -35,7 +35,7 @@ public:
     return edad;
   }
 
-  double setPromedio ()
+  double getPromedio ()
   {
     return promedio;
   }
@@ -59,10 +59,11 @@ class Grupo {
 private:
   Alumno* estudiantes;
   int cantidad;
+  int max;
   
 public:
-  Grupo(int size) {
-    estudiantes = new Alumno[size];
+  Grupo(int max) {
+    estudiantes = new Alumno[max];
   }
 
 
@@ -82,18 +83,18 @@ public:
   
   
   void displayEstudiantes() {
-    cout << "Máximo de estudiantes en el grupo: " << size << endl;
+    cout << "Máximo de estudiantes en el grupo: " << this->max << endl;
     for (int i = 0; i < cantidad; i++) {
-      Studentn estudiante = estudiantes[i];
+      Alumno estudiante = estudiantes[i];
       cout << "\nAlumno " << i+1 << ": " << endl;
-      cout << "Nombre: " << estudiante.getName() << endl;
-      cout << "Edad: " << estudiante.getAge() << endl;
-      cout << "Promedio: " << estudiante.getAverage() << endl;
+      cout << "Nombre: " << estudiante.getNombre() << endl;
+      cout << "Edad: " << estudiante.getEdad() << endl;
+      cout << "Promedio: " << estudiante.getPromedio() << endl;
     }
   }
 
   void addEstudiante(Alumno s) {
-    if (cantidad < size) {
+    if (cantidad < max) {
       estudiantes[cantidad] = s;
       cantidad++;
     }
